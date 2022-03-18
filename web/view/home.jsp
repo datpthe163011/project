@@ -43,26 +43,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%=order.getSize()+" "%> items in the shopping cart.
-        <table border="1px">
-            <tr>
-                <td>Product</td>
-                <td>Price</td>
-                <td></td>
-            </tr>
-            <% for (Product p : products) {
-            %>
-            <tr>
-                <td><%=p.getName()%></td>
-                <td><%=p.getPrice()%></td>
-                <td>
-                    <form action="addcart" method="POST"> 
-                        <input type="hidden" value="<%=p.getId()%>" name="id"/>
-                        <input type="submit" value="Buy"/>
-                    </form>
-                </td>
-            </tr>
-            <%}%>
+        <a href="/Project/list">Kho</a> <br/>
+        <a href="/Project/Insert"> Nhập Hàng </a><br/>
+        <a href="/Project/Insert"> Bán Hàng </a><br/>
+        <a href="/Project/faces/view/Update2.jsp"> Cập Nhật Kho Hàng </a><br/>
+        <a href="/Project/Insert"> Lịch Sử Giao Dịch </a><br/>
+        <a href="/Project/Insert"> Nợ </a><br/>
         </table>
     </body>
 </html>

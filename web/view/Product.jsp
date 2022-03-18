@@ -15,13 +15,10 @@
         <title>JSP Page</title>
         <%
             ArrayList<Product> products = (ArrayList<Product>)request.getAttribute("products");
-            Order order = (Order)session.getAttribute("shoppingcart");
-            if(order==null)
-                order = new Order();
         %>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Well Come!</h1>
         <table border="1">
             <thead>
                 <tr>
@@ -35,15 +32,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <% for (Product p : products) {
+            %>
+            <tr>
+                <td><%=p.getPID()%></td>
+                <td><%=p.getNameP()%></td>
+                <td><%=p.getQuantity()%></td>
+                <td><%=p.getImport_Price()%></td>
+                <td><%=p.getSale_Price()%></td>
+                <td><%=p.getDay_in()%></td>
+                <td><%=p.getDay_Out()%></td>
+                
+                
+                
+            </tr>
+            <%}%>
                            </tbody>
         </table>
 
