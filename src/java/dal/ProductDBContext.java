@@ -46,18 +46,39 @@ public class ProductDBContext extends DBContext {
         return products;
     }
 
-    public Product getProduct(int id) {
-        ArrayList<Product> products = getProducts();
-        for (Product product : products) {
-            if (product.getPID() == id) {
-                return product;
+    public Product getProduct(int PID) {
+        try {
+            String sql = "SELECT [PID]\n"
+                    + "      ,[NameP]\n"
+                    + "      ,[Quantity]\n"
+                    + "      ,[Import_Price]\n"
+                    + "      ,[Sale_Price]\n"
+                    + "      ,[Day_in]\n"
+                    + "      ,[Day_Out]\n"
+                    + "  FROM [dbo].[Product]\n"
+                    + " WHERE PID = ?\n";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, PID);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Product p = new Product();
+                p.setPID(rs.getInt("PID"));
+                p.setNameP(rs.getString("NameP"));
+                p.setQuantity(rs.getInt("Quantity"));
+                p.setImport_Price(rs.getInt("Import_Price"));
+                p.setSale_Price(rs.getInt("Sale_Price"));
+                p.setDay_in(rs.getDate("Day_in"));
+                p.setDay_Out(rs.getDate("Day_Out"));
+                return p;
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     public void insertProduct(Product p) {
-        String sql = "INSERT INTO [dbo].[Product]\n"
+        String sql = "INSERT INTO [Product]\n"
                 + "           ([PID]\n"
                 + "           ,[NameP]\n"
                 + "           ,[Quantity]\n"
@@ -106,25 +127,25 @@ public class ProductDBContext extends DBContext {
     }
 
     public void updateProduct(Product p) {
-        String sql = "UPDATE [dbo].[Product]\n"
-                + "   SET [PID] = ?\n"
-                + "      ,[NameP] = ?\n"
+        String sql = "UPDATE [Product]\n"
+                + "   SET \n"
+                + "      [NameP] = ?\n"
                 + "      ,[Quantity] = ?\n"
                 + "      ,[Import_Price] = ?\n"
                 + "      ,[Sale_Price] = ?\n"
                 + "      ,[Day_in] = ?\n"
                 + "      ,[Day_Out] = ?\n"
-                + " WHERE [PID] =?";
+                + " WHERE [PID] = ?";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
-            stm.setInt(1, p.getPID());
-            stm.setString(2, p.getNameP());
-            stm.setInt(3, p.getQuantity());
-            stm.setInt(4, p.getImport_Price());
-            stm.setInt(5, p.getSale_Price());
-            stm.setDate(6, p.getDay_in());
-            stm.setDate(7, p.getDay_Out());
+            stm.setString(1, p.getNameP());
+            stm.setInt(2, p.getQuantity());
+            stm.setInt(3, p.getImport_Price());
+            stm.setInt(4, p.getSale_Price());
+            stm.setDate(5, p.getDay_in());
+            stm.setDate(6, p.getDay_Out());
+            stm.setInt(7, p.getPID());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,8 +169,8 @@ public class ProductDBContext extends DBContext {
     }
 
     public void deleteProduct(Product p) {
-        String sql = "DELETE Student\n"
-                + " WHERE [sid] = ?";
+        String sql = "DELETE FROM Product\n"
+                + " WHERE [PID] = ?";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);

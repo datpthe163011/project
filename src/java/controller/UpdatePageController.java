@@ -19,7 +19,7 @@ import model.Product;
  *
  * @author pc
  */
-public class DeleteController extends HttpServlet {
+public class UpdatePageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +32,12 @@ public class DeleteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int PID = Integer.parseInt(request.getParameter("PID")); 
         ProductDBContext db = new ProductDBContext();
-        Product s = new Product();
-        s.setPID(PID);
-        db.deleteProduct(s);
-        response.sendRedirect("list");
-        
-                
-       
-
+        ArrayList<Product> products = db.getProducts();
+        request.setAttribute("products", products);
+        request.getRequestDispatcher("view/updatepage.jsp").forward(request, response);
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -15,7 +15,26 @@
         <title>JSP Page</title>
         <%
             ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+            
         %>
+        <script>
+            function deleteProduct(lnk)
+            {
+                var result = confirm("Are you sure?");
+                var name = lnk.getAttribute('value');
+                if (result)
+                {
+                    var string = 'Delete?PID=' + name;
+
+                    window.location.href = string;
+                }
+            }
+
+            $('#bcd a').each(function () {
+                var text = $(this).text();
+                alert(text + ': ' + link);
+            });
+        </script>
     </head>
     <body>
         <h1>Well Come!</h1>
@@ -42,7 +61,8 @@
                     <td><%=p.getSale_Price()%></td>
                     <td><%=p.getDay_in()%></td>
                     <td><%=p.getDay_Out()%></td>
-
+                    <td><a href="Update?PID=<%=p.getPID()%>">Update</a>
+                        <a href="#" onclick="deleteProduct(this)" value="<%=p.getPID()%>" >Delete</a></td>
 
 
                 </tr>

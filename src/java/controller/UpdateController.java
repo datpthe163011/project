@@ -22,7 +22,6 @@ import model.Product;
  */
 public class UpdateController extends HttpServlet {
 
-   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -35,16 +34,15 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int id = Integer.parseInt(request.getParameter("id"));
-        
-        
+
+        int PID = Integer.parseInt(request.getParameter("PID"));
         ProductDBContext db = new ProductDBContext();
-        ArrayList<Product> products = db.getProducts();
-       
-        request.setAttribute("product", products);
+        Product product = db.getProduct(PID);
+        request.setAttribute("product", product);
+
         
-        request.getRequestDispatcher("../setting/update.jsp").forward(request, response);
+
+        request.getRequestDispatcher("setting/update.jsp").forward(request, response);
     }
 
     /**
@@ -61,21 +59,20 @@ public class UpdateController extends HttpServlet {
         String raw_PID = request.getParameter("PID");
         String raw_NameP = request.getParameter("NameP");
         String raw_Quantity = request.getParameter("Quantity");
-        String raw_Import_Price = request.getParameter("Import_Price");       
-        String raw_Sale_Price = request.getParameter("Sale_Price");     
+        String raw_Import_Price = request.getParameter("Import_Price");
+        String raw_Sale_Price = request.getParameter("Sale_Price");
         String raw_Day_in = request.getParameter("Day_in");
         String raw_Day_Out = request.getParameter("Day_Out");
-  
-         //validate data
-        int id = Integer.parseInt(raw_PID);      
+
+        //validate data
+        int id = Integer.parseInt(raw_PID);
         String name = raw_NameP;
         int Quantity = Integer.parseInt(raw_Quantity);
         int Import_Price = Integer.parseInt(raw_Import_Price);
         int Sale_Price = Integer.parseInt(raw_Sale_Price);
         Date Day_in = Date.valueOf(raw_Day_in);
         Date Day_Out = Date.valueOf(raw_Day_Out);
-        
-        
+
         Product p = new Product();
         p.setPID(id);
         p.setNameP(name);
@@ -84,11 +81,10 @@ public class UpdateController extends HttpServlet {
         p.setSale_Price(Sale_Price);
         p.setDay_in(Day_in);
         p.setDay_Out(Day_Out);
-        
-        
+
         ProductDBContext db = new ProductDBContext();
-        db.insertProduct(p);
-        
+        db.updateProduct(p);
+
         //response.getWriter().println("done");
         response.sendRedirect("list");
     }

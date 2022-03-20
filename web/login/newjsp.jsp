@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Update2
-    Created on : Mar 18, 2022, 6:13:26 AM
+    Document   : newjsp
+    Created on : Mar 18, 2022, 7:55:14 AM
     Author     : pc
 --%>
 
@@ -13,7 +13,5 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="/Project/Insert"> Hàng Mới </a><br/>
-        <a href="/Project/viewtoupdate"> Hàng Đã Có </a><br/>
     </body>
 </html>

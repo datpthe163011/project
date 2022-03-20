@@ -8,22 +8,22 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th>Kho Hang</th>
-                    <th><a href="Product.jsp">Detail</a></th>
+                    <th>Kho Hàng</th>
+                    <th>href="/Project/list">Detail</a></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Nhap Hang</td>
-                    <td><a href="InputProduct">Detail</a></td>
+                    <td>href="/Project/Insert">Detail</a></td>
                 </tr>
                 <tr>
                     <td>Ban Hang</td>
-                    <td><a href="sell">Detail</a></td>
+                    <td> href="/Project/Insert">Detail</a></td>
                 </tr>
                 <tr>
                     <td>Hoa don</td>
-                    <td><a href="Bill">Detail</a></td>
+                    <td>href="/Project/faces/view/Update2.jsp">Detail</a></td>
                 </tr>
                 <tr>
                     <td>No</td>
